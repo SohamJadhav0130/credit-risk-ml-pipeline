@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[tool.hatch.build.targets.wheel]
+packages = ["src/credit_pipeline"]
+[project]
+name = "credit-ml-pipeline"
+version = "0.1.0"
+description = "Fair Loan Default Prediction with MLflow and Optuna"
+requires-python = ">=3.10"
+
+dependencies = [
+    #Core Data and ML
+
+    "pandas>=1.3.0",
+    "numpy>=1.21.0",
+    "scikit-learn>=1.0.0",
+    "xgboost>=1.5.0",
+    "lightgbm>=3.3.0",
+    "imbalanced-learn>=0.8.0",
+
+    #Hyperparameter Tuning
+    "optuna>=2.10.0",
+    "optuna-dashboard>=0.8.0",
+
+    #Experiment Tracking
+    "mlflow>=1.20.0",
+
+    #Visualization & Explainability
+    "matplotlib>=3.4.0",
+    "seaborn>=0.11.0",
+    "shap>=0.40.0",
+    "plotly>=5.0.0",
+    
+    #Utilities
+    "joblib>=1.1.0",
+    "scikit-learn-intelex>=2021.3.0",
+    "jupyter>=1.0.0",
+    "ipython>=7.0.0",
+    "tqdm>=4.60.0",
+]
+
+[project.optional-dependencies]
+gpu-lite = [
+    "cupy>=10.0.0",          # Just GPU arrays
+]
+#gpu-full = [
+#   "cuml>=0.19.0",
+#   "cudf>=0.19.0",
+#   "cupy>=10.0.0",
+#   "fairkit-learn>=0.2.0",
+#   "aif360>=0.4.0",
+#]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.uv]
+environments = ["python_version == '3.10'"]
+
