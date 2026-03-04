@@ -1,0 +1,57 @@
+missing_values:
+  threshold: 40
+  excluded_attributes:
+    - OWN_CAR_AGE
+    - EXT_SOURCE_1
+
+unrelated_items_removal:
+  unrelated_items:
+    - NAME_TYPE_SUITE
+    - FLAG_MOBIL
+    - FLAG_EMAIL
+    - FLAG_EMP_PHONE
+    - FLAG_WORK_PHONE
+    - FLAG_CONT_MOBILE
+    - FLAG_PHONE
+    - HOUR_APPR_PROCESS_START
+    - WEEKDAY_APPR_PROCESS_START
+    - OBS_30_CNT_SOCIAL_CIRCLE
+    - DEF_30_CNT_SOCIAL_CIRCLE
+    - OBS_60_CNT_SOCIAL_CIRCLE
+
+flag_columns_correlation:
+  flag_columns:
+    - FLAG_DOCUMENT_2
+    - FLAG_DOCUMENT_3
+    - FLAG_DOCUMENT_4
+    - FLAG_DOCUMENT_5
+    - FLAG_DOCUMENT_6
+    - FLAG_DOCUMENT_7
+    - FLAG_DOCUMENT_8
+    - FLAG_DOCUMENT_9
+    - FLAG_DOCUMENT_10
+    - FLAG_DOCUMENT_11
+    - FLAG_DOCUMENT_12
+    - FLAG_DOCUMENT_13
+    - FLAG_DOCUMENT_14
+    - FLAG_DOCUMENT_15
+    - FLAG_DOCUMENT_16
+    - FLAG_DOCUMENT_17
+    - FLAG_DOCUMENT_18
+    - FLAG_DOCUMENT_19
+    - FLAG_DOCUMENT_20
+    - FLAG_DOCUMENT_21
+  correlation_threshold: 0.05
+
+outliers_removal:
+  lower_bound: 0.01
+  upper_bound: 0.99
+  skip_columns:
+    - TARGET
+    - SK_ID_CURR
+    - AMT_REQ_CREDIT_BUREAU_HOUR
+    - AMT_REQ_CREDIT_BUREAU_DAY
+
+split_data:
+  test_size: 0.2
+  random_state: 42
