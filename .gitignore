@@ -17,7 +17,7 @@ __pycache__/
 *.xlsx
 
 # Models
-models/
+/models/
 *.joblib
 *.pkl
 *.pickle
@@ -47,3 +47,5 @@ Thumbs.db
 /Fair-Loan-Default-Prediction/
 /models/
 uv.lock
+
+catboost_info
