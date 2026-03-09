@@ -17,7 +17,7 @@ __pycache__/
 *.xlsx
 
 # Models
-models/
+/models/
 *.joblib
 *.pkl
 *.pickle
