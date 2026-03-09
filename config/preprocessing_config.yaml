@@ -55,3 +55,17 @@ outliers_removal:
 split_data:
   test_size: 0.2
   random_state: 42
+
+feature_engineering:
+  pca_variance_threshold: 0.80
+  random_state: 42
+  n_clusters_kmeans: 3
+  n_components_gmm: 6
+
+optuna_tuning:
+  cv_folds : 5
+  random_state: 42 #Common all over the notebook
+  n_trials : 100
+
+train :
+  random_state: 42
