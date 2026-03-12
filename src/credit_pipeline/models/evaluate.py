@@ -11,8 +11,9 @@ from sklearn.metrics import (
     roc_curve,
 )
 from credit_pipeline.preprocessing.pipeline import build_pipeline
-# from credit_pipeline.utils.config import load_config
 
+# from credit_pipeline.utils.config import load_config
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR, MODELS_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +45,7 @@ def evaluate_model(model_name, y_test, y_proba, threshold):
     }
 
 
-def plot_precision_recall(models_probas, y_test, save_path="models/pr_curve.png"):
+def plot_precision_recall(models_probas, y_test, save_path):
     plt.figure(figsize=(8, 6))
     for model_name, y_proba in models_probas.items():
         precision, recall, _ = precision_recall_curve(y_test, y_proba)
@@ -61,7 +62,7 @@ def plot_precision_recall(models_probas, y_test, save_path="models/pr_curve.png"
     logger.info(f"PR curve saved to {save_path}")
 
 
-def plot_roc_curve(models_probas, y_test, save_path="models/roc_curve.png"):
+def plot_roc_curve(models_probas, y_test, save_path):
     plt.figure(figsize=(8, 6))
     for model_name, y_proba in models_probas.items():
         fpr, tpr, _ = roc_curve(y_test, y_proba)
@@ -80,22 +81,18 @@ def plot_roc_curve(models_probas, y_test, save_path="models/roc_curve.png"):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    data_path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
-    config_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\config\\preprocessing_config.yaml"
-    )
-    prev_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\data\\previous_application.csv"
-    )
+    data_path = DATA_DIR / "application_data.csv"
+    config_path = CONFIG_DIR / "preprocessing_config.yaml"
+    prev_path = DATA_DIR / "previous_application.csv"
 
     X_train, X_test, y_train, y_test, numeric_cols, categorical_cols, transformers = (
         build_pipeline(data_path, prev_path, config_path)
     )
 
     # Load models
-    xgb_best = joblib.load("models/xgb_best.joblib")
-    lgb_best = joblib.load("models/lgb_best.joblib")
-    catboost_best = joblib.load("models/catboost_best.joblib")
+    xgb_best = joblib.load(MODELS_DIR / "xgb_best.joblib")
+    lgb_best = joblib.load(MODELS_DIR / "lgb_best.joblib")
+    catboost_best = joblib.load(MODELS_DIR / "catboost_best.joblib")
 
     # Get probabilities
     xgb_proba = xgb_best.predict_proba(X_test)[:, 1]
@@ -116,5 +113,5 @@ if __name__ == "__main__":
             evaluate_model(model_name, y_test, y_proba, threshold)
 
     # Plot PR and Roc curves
-    plot_precision_recall(models_probas, y_test)
-    plot_roc_curve(models_probas, y_test, save_path="models/roc_curve.png")
+    plot_precision_recall(models_probas, y_test, save_path=MODELS_DIR / "pr_curve.png")
+    plot_roc_curve(models_probas, y_test, save_path=MODELS_DIR / "roc_curve.png")

@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression as lr
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from xgboost import XGBClassifier as xgb
 import numpy as np
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR
 
 # optuna.logging.set_verbosity(optuna.logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -163,13 +164,10 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     logging.info("Started the Optuna Tuning")
 
-    data_path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
-    config_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\config\\preprocessing_config.yaml"
-    )
-    prev_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\data\\previous_application.csv"
-    )
+    data_path = DATA_DIR / "application_data.csv"
+    config_path = CONFIG_DIR / "preprocessing_config.yaml"
+    prev_path = DATA_DIR / "previous_application.csv"
+
     config = load_config(config_path)
     random_state = config["optuna_tuning"]["random_state"]
     cv_folds = config["optuna_tuning"]["cv_folds"]

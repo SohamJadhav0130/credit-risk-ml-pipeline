@@ -2,6 +2,7 @@ import logging
 import joblib
 from sklearn.metrics import average_precision_score
 from credit_pipeline.preprocessing.pipeline import build_pipeline
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -27,13 +28,9 @@ def ensemble_predict(X_test, y_test):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    data_path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
-    config_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\config\\preprocessing_config.yaml"
-    )
-    prev_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\data\\previous_application.csv"
-    )
+    data_path = DATA_DIR / "application_data.csv"
+    config_path = CONFIG_DIR / "preprocessing_config.yaml"
+    prev_path = DATA_DIR / "previous_application.csv"
 
     X_train, X_test, y_train, y_test, numeric_cols, categorical_cols, transformers = (
         build_pipeline(data_path, prev_path, config_path)

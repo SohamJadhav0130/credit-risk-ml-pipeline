@@ -1,10 +1,12 @@
 import logging
 
-from credit_pipeline.utils.config import load_config
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.mixture import GaussianMixture
 from sklearn.preprocessing import StandardScaler
+
+from credit_pipeline.utils.config import load_config
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -162,10 +164,10 @@ class FeaturesEngineering:
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    data_path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
-    config_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\config\\preprocessing_config.yaml"
-    )
+    data_path = DATA_DIR / "application_data.csv"
+    config_path = CONFIG_DIR / "preprocessing_config.yaml"
+
+    # For individual testing purposes only
     # loader = DataLoader()
     # loader.load_data(path)
     # data = loader.save_data()
