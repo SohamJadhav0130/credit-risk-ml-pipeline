@@ -73,3 +73,20 @@ train:
 shap:
   drop_threshold: 0.001
   sample_rows: 5000
+  features_to_drop: [
+    'SK_ID_CURR',
+    'REG_REGION_NOT_WORK_REGION',
+    'LIVE_REGION_NOT_WORK_REGION',
+    'REG_CITY_NOT_WORK_CITY',
+    'LIVE_CITY_NOT_WORK_CITY',
+    'AMT_REQ_CREDIT_BUREAU_HOUR',
+    'AMT_REQ_CREDIT_BUREAU_DAY',
+    'NAME_FAMILY_STATUS_Separated',
+    'NAME_FAMILY_STATUS_Widow',
+    'NAME_HOUSING_TYPE_With parents',
+    'NAME_INCOME_TYPE_Maternity leave',
+    'NAME_INCOME_TYPE_State servant',
+    'NAME_INCOME_TYPE_Student',
+    'NAME_INCOME_TYPE_Unemployed'
+  ]
+  
