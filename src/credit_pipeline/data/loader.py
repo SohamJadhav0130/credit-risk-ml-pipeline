@@ -1,7 +1,9 @@
 import logging
 import pandas as pd
+from credit_pipeline.utils.paths import DATA_DIR
 
 logger = logging.getLogger(__name__)
+
 
 class DataLoader:
     def __init__(self):
@@ -9,7 +11,9 @@ class DataLoader:
 
     def load_data(self, path: str):
         self.data = pd.read_csv(path)
-        logger.info(f"Data loaded {self.data.shape[0]} rows and {self.data.shape[1]} columns")
+        logger.info(
+            f"Data loaded {self.data.shape[0]} rows and {self.data.shape[1]} columns"
+        )
         return self
 
     def validate_data(self):
@@ -31,9 +35,11 @@ class DataLoader:
             return self.data
         return None
 
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
+    path = DATA_DIR / "application_data.csv"
+
     loader = DataLoader()
     loader.load_data(path)
     loader.display_data()

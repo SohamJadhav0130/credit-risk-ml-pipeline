@@ -1,14 +1,11 @@
 import yaml
 
-def load_config(config_path: str) -> dict:
-    """
-    Load a YAML configuration file and return its contents as a dictionary.
+from credit_pipeline.utils.paths import CONFIG_DIR
 
-    Args:
-        config_path (str): The path to the YAML configuration file.
-    Returns:
-        dict: The contents of the YAML file as a dictionary.
-    """
-    with open(config_path, 'r') as file:
+
+def load_config(config_path=None) -> dict:
+    if config_path is None:
+        config_path = CONFIG_DIR / "preprocessing_config.yaml"
+    with open(config_path, "r") as file:
         config = yaml.safe_load(file)
     return config

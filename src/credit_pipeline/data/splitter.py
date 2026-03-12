@@ -1,6 +1,7 @@
 import logging
 from credit_pipeline.utils.config import load_config
 from sklearn.model_selection import train_test_split
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR
 
 logging.basicConfig(level=logging.INFO)
 
@@ -29,10 +30,8 @@ class DataSplitter:
 
 if __name__ == "__main__":
     logging.info("Starting data splitting process")
-    data_path = "E:\\DCS Final Project\\credit-ml-pipeline\\data\\application_data.csv"
-    config_path = (
-        "E:\\DCS Final Project\\credit-ml-pipeline\\config\\preprocessing_config.yaml"
-    )
+    data_path = DATA_DIR / "application_data.csv"
+    config_path = CONFIG_DIR / "preprocessing_config.yaml"
 
     # For testing purposes only, in actual pipeline this will be imported from pipeline.py
     # from credit_pipeline.preprocessing.pipeline import build_pipeline
