@@ -45,5 +45,6 @@ uv.lock
 Thumbs.db
 
 /Fair-Loan-Default-Prediction/
-/models/
-uv.lock
+/catboost_info/
+/cache/
+/notebooks/
