@@ -11,7 +11,7 @@ from sklearn.linear_model import LogisticRegression as lr
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from xgboost import XGBClassifier as xgb
 import numpy as np
-from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR, OPTUNA_DB_PATH
 
 # optuna.logging.set_verbosity(optuna.logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     xgb_study = optuna.create_study(
         direction="maximize",
         study_name="xgb_study",
-        storage="sqlite:///logs/optuna/optuna_results.db",
+        storage=f"sqlite:///{OPTUNA_DB_PATH}",
         load_if_exists=True,
     )
     xgb_study.optimize(
@@ -211,7 +211,7 @@ if __name__ == "__main__":
     catboost_study = optuna.create_study(
         direction="maximize",
         study_name="catboost_study",
-        storage="sqlite:///logs/optuna/optuna_results.db",
+        storage=f"sqlite:///{OPTUNA_DB_PATH}",
         load_if_exists=True,
     )
     catboost_study.optimize(
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     lightGBM_study = optuna.create_study(
         direction="maximize",
         study_name="lightGBM_study",
-        storage="sqlite:///logs/optuna/optuna_results.db",
+        storage=f"sqlite:///{OPTUNA_DB_PATH}",
         load_if_exists=True,
     )
     lightGBM_study.optimize(
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     random_forest_study = optuna.create_study(
         direction="maximize",
         study_name="rf_study",
-        storage="sqlite:///logs/optuna/optuna_results.db",
+        storage=f"sqlite:///{OPTUNA_DB_PATH}",
         load_if_exists=True,
     )
     random_forest_study.optimize(

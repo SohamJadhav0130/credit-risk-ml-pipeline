@@ -134,9 +134,9 @@ if __name__ == "__main__":
     )
 
     # Load models
-    xgb_best = joblib.load("models/xgb_best.joblib")
-    lgb_best = joblib.load("models/lgb_best.joblib")
-    catboost_best = joblib.load("models/catboost_best.joblib")
+    xgb_best = joblib.load(MODELS_DIR / "xgb_best.joblib")
+    lgb_best = joblib.load(MODELS_DIR / "lgb_best.joblib")
+    catboost_best = joblib.load(MODELS_DIR / "catboost_best.joblib")
 
     # Get probabilities
     xgb_proba = xgb_best.predict_proba(X_test)[:, 1]
