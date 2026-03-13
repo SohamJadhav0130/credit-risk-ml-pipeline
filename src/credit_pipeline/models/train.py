@@ -9,7 +9,7 @@ from lightgbm import LGBMClassifier as lgb
 from catboost import CatBoostClassifier as cbc
 from sklearn.metrics import average_precision_score
 from credit_pipeline.preprocessing.pipeline import build_pipeline
-from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR, PROJECT_ROOT
+from credit_pipeline.utils.paths import CONFIG_DIR, DATA_DIR, OPTUNA_DB_PATH, MODELS_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ def model_training(X_train, X_test, y_train, y_test, scale_pos_weight):
     xgb_best.fit(X_train, y_train)
     xgb_score = average_precision_score(y_test, xgb_best.predict_proba(X_test)[:, 1])
     logger.info(f"XGB AUC-PR on test set: {xgb_score}")
-    joblib.dump(xgb_best, "models/xgb_best.joblib")
+    joblib.dump(xgb_best, MODELS_DIR / "xgb_best.joblib")
 
     # LightGBM
     lgb_study = optuna.load_study(study_name="lightGBM_study", storage=storage)
@@ -46,7 +46,7 @@ def model_training(X_train, X_test, y_train, y_test, scale_pos_weight):
     lgb_best.fit(X_train, y_train)
     lgb_score = average_precision_score(y_test, lgb_best.predict_proba(X_test)[:, 1])
     logger.info(f"LightGBM AUC-PR on test set: {lgb_score}")
-    joblib.dump(lgb_best, "models/lgb_best.joblib")
+    joblib.dump(lgb_best, MODELS_DIR / "lgb_best.joblib")
 
     # CatBoost
     catboost_study = optuna.load_study(study_name="catboost_study", storage=storage)
@@ -61,7 +61,7 @@ def model_training(X_train, X_test, y_train, y_test, scale_pos_weight):
         y_test, catboost_best.predict_proba(X_test)[:, 1]
     )
     logger.info(f"CatBoost AUC-PR on test set: {catboost_score}")
-    joblib.dump(catboost_best, "models/catboost_best.joblib")
+    joblib.dump(catboost_best, MODELS_DIR / "catboost_best.joblib")
 
     return xgb_best, lgb_best, catboost_best
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     config_path = CONFIG_DIR / "preprocessing_config.yaml"
     prev_path = DATA_DIR / "previous_application.csv"
 
-    storage = f"sqlite:///{PROJECT_ROOT / 'src' / 'credit_pipeline' / 'logs' / 'optuna' / 'optuna_results.db'}"
+    storage = f"sqlite:///{OPTUNA_DB_PATH}"
 
     config = load_config(config_path)
     random_state = config["train"]["random_state"]
