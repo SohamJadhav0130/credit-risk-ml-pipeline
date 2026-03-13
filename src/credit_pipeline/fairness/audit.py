@@ -5,7 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from credit_pipeline.preprocessing.pipeline import build_pipeline
-from credit_pipeline.utils.config import load_config
 from credit_pipeline.utils.paths import DATA_DIR, CONFIG_DIR, MODELS_DIR
 
 logger = logging.getLogger(__name__)
