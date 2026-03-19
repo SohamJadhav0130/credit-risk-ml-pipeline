@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # can be used to tracking experiements.
 
 
-def model_training(X_train, X_test, y_train, y_test, scale_pos_weight):
+def model_training(X_train, X_test, y_train, y_test, scale_pos_weight, storage):
 
     # XGBoost
     xgb_study = optuna.load_study(study_name="xgb_study", storage=storage)
@@ -91,4 +91,5 @@ if __name__ == "__main__":
         y_train=y_train,
         y_test=y_test,
         scale_pos_weight=scale_pos_weight,
+        storage=storage,
     )
