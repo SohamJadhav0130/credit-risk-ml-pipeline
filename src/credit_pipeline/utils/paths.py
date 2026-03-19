@@ -9,5 +9,8 @@ MODELS_DIR = PROJECT_ROOT / "logs" / "training" / "models"
 LOGS_DIR = PROJECT_ROOT / "logs"
 CACHE_DIR = PROJECT_ROOT / "cache"
 OPTUNA_DB_PATH = LOGS_DIR / "optuna" / "optuna_results.db"
+SHAP_DIR = MODELS_DIR / "shap"
+FAIRNESS_DIR = MODELS_DIR / "fairness"
+
 if __name__ == "__main__":
     print(PROJECT_ROOT)
