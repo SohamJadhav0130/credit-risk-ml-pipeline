@@ -1,0 +1,8 @@
+mlflow:
+  tracking_uri: "https://dagshub.com/SohamJadhav0130/credit-risk-ml-pipeline.mlflow"
+  experiment_name: "credit-risk-pipeline"
+  registered_model_name: "credit-risk-ensemble"
+
+dagshub:
+  repo_owner : "SohamJadhav0130"
+  repo_name : "credit-risk-ml-pipeline"
